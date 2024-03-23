@@ -43,7 +43,7 @@ class _MobileBody extends StatelessWidget {
           const CustomTitle(),
           SizedBox(
             width: double.infinity,
-            height: 420,
+            height: 530,
             child: child,
           ),
           const SizedBox(
@@ -73,7 +73,7 @@ class _DesktopBody extends StatelessWidget {
           const BackgroundTwitter(),
           //View Container
           Container(
-            width: 650,
+            width: 700,
             height: double.infinity,
             color: Colors.black,
             child: Column(children: [
