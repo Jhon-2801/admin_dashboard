@@ -15,6 +15,7 @@ class Adminhandlers {
       return const DashboardView();
     },
   );
+  
   static Handler register = Handler(
     handlerFunc: (context, parameters) {
       final authProvider = Provider.of<AuthProvider>(context!);

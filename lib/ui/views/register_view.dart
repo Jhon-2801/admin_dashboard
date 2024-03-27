@@ -1,3 +1,4 @@
+import 'package:admin_dashboard/providers/auth_provider.dart';
 import 'package:admin_dashboard/providers/register_form_provider.dart';
 import 'package:admin_dashboard/router/router.dart';
 import 'package:admin_dashboard/ui/buttons/custom_outline.dart';
@@ -63,7 +64,8 @@ class RegisterView extends StatelessWidget {
                       height: 20,
                     ),
                     TextFormField(
-                      onChanged: (value) => registerFormProvider.password = value,
+                      onChanged: (value) =>
+                          registerFormProvider.password = value,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "Ingrese su contraseña";
@@ -84,7 +86,16 @@ class RegisterView extends StatelessWidget {
                     ),
                     CustomOutlinedButton(
                         onPressed: () {
-                          registerFormProvider.validateForm();
+                          final validFrom = registerFormProvider.validateForm();
+                          if (!validFrom) return;
+
+                          final authProvider =
+                              Provider.of<AuthProvider>(context, listen: false);
+
+                          authProvider.register(
+                              registerFormProvider.email,
+                              registerFormProvider.password,
+                              registerFormProvider.name);
                         },
                         text: 'Crear cuenta'),
 
@@ -95,7 +106,8 @@ class RegisterView extends StatelessWidget {
                     LinkText(
                         text: 'Login',
                         onPressed: () {
-                          Navigator.pushNamed(context, Flurorouter.loginRouter);
+                          Navigator.pushReplacementNamed(
+                              context, Flurorouter.registerRouter);
                         })
                   ],
                 ),
